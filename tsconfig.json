@@ -36,7 +36,7 @@
 		}
 	},
 	"include": [
-		"src",
+    "./src/**/*d.ts",
 		"src/icons/assets/communications/.tsx",
 		"src/icons/assets/user_interface/.tsx"
 	],
