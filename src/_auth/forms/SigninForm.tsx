@@ -1,15 +1,16 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
-import { useToast } from "@/components/ui/use-toast"
+import { useToast } from "../../components/ui/use-toast"
 import { z } from "zod";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, } from "@/components/ui/form"
+import { Button } from "../../components/ui/button";
+import { Input } from "../../components/ui/input"
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, } from "../../components/ui/form"
 import { Link, useNavigate } from "react-router-dom"
-import { SignInValidation } from "@/lib/validation"
-import Loader from "@/components/shared/Loader"
-import { useSignInAccount } from "@/lib/react-query/queriesAndMutations";
-import { useUserContext } from "@/context/AuthContext";
+import { SignInValidation } from "../../lib/validation"
+import Loader from "../../components/shared/Loader"
+import { useSignInAccount } from "../../lib/react-query/queriesAndMutations";
+import { useUserContext } from "../../context/AuthContext";
+import React from "react";
 
 const SigninForm = () => {
   const { toast } = useToast()
