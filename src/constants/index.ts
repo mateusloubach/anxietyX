@@ -2,27 +2,32 @@ export const sidebarLinks = [
     {
       imgURL: "/assets/icons/home.svg",
       route: "/",
-      label: "Home",
+      label: "Início",
     },
     {
       imgURL: "/assets/icons/wallpaper.svg",
       route: "/explore",
-      label: "Explore",
+      label: "Explorar",
+    },
+    {
+      imgURL: "/assets/icons/gallery-add.svg",
+      route: "/create-event",
+      label: "Criar Evento",
     },
     {
       imgURL: "/assets/icons/people.svg",
       route: "/all-users",
-      label: "People",
+      label: "Pessoas",
     },
     {
       imgURL: "/assets/icons/bookmark.svg",
       route: "/saved",
-      label: "Saved",
+      label: "Salvos",
     },
     {
       imgURL: "/assets/icons/gallery-add.svg",
       route: "/create-post",
-      label: "Create Post",
+      label: "Criar Post",
     },
   ];
   
@@ -36,6 +41,11 @@ export const sidebarLinks = [
       imgURL: "/assets/icons/wallpaper.svg",
       route: "/explore",
       label: "Explore",
+    },
+    {
+      imgURL: "/assets/icons/gallery-add.svg",
+      route: "/create-event",
+      label: "Create",
     },
     {
       imgURL: "/assets/icons/bookmark.svg",

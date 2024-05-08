@@ -1,8 +1,8 @@
-import { Link, Navigate, useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import { Button } from '../ui/button'
-import { useSignOutAccount } from '@/lib/react-query/queriesAndMutations'
-import { useEffect } from 'react'
-import { useUserContext } from '@/context/AuthContext'
+import { useSignOutAccount } from '../../lib/react-query/queriesAndMutations'
+import React, { useEffect } from 'react'
+import { useUserContext } from '../../context/AuthContext'
 
 const Topbar = () => {
     const {mutate: signOut, isSuccess} = useSignOutAccount()
@@ -11,13 +11,13 @@ const Topbar = () => {
 
     useEffect(() => {
         if (isSuccess) navigate(0);
-    }, [isSuccess] )
+    }, [isSuccess, navigate] )
 
     return (
         <section className='topbar'>
             <div className='flex-between py-4 px-5'>
                 <Link to='/' className='flex gap-3 items-center'>
-                    <img src='/assets/images/Clogo.svg' alt='logo' width={130} height={325} />
+                    <img src='/assets/images/logo.svg' alt='logo' width={130} height={325} />
                     
                 </Link>
                 <div className='flex gap-4'>

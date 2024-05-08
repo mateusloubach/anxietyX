@@ -41,11 +41,11 @@ const FileUploader = ( {fieldChange, mediaUrl}: FileUploaderProps ) => {
                 ) : (
                     <div className='file_uploader-box'>
                         <img src='/assets/icons/file-upload.svg' width={96} height={77} alt='file-upload'/>
-                        <h3 className='base-medium text-ligh-2 mb-2 mt-6'>Drag Photo Here</h3>
+                        <h3 className='base-medium text-ligh-2 mb-2 mt-6'>Arraste a foto aqui</h3>
                         <p className='text-light-4 small-regular mb-6'>SVG, PNG, JPG</p>
 
                         <Button className='shad-button_dark_4'>
-                            Select from Computer
+                            Selecione no computador
                         </Button>
                     </div>
                 )

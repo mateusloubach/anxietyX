@@ -1,9 +1,10 @@
-import Loader from "@/components/shared/Loader";
-import PostStats from "@/components/shared/PostStats";
-import { Button } from "@/components/ui/button";
-import { useUserContext } from "@/context/AuthContext";
-import { useGetPostById } from "@/lib/react-query/queriesAndMutations"
-import { multiFormatDateString } from "@/lib/utils";
+import React from "react";
+import Loader from "../../components/shared/Loader";
+import PostStats from "../../components/shared/PostStats";
+import { Button } from "../../components/ui/button";
+import { useUserContext } from "../../context/AuthContext";
+import { useGetPostById } from "../../lib/react-query/queriesAndMutations"
+import { multiFormatDateString } from "../../lib/utils";
 import { useParams, Link } from "react-router-dom"
 
 
@@ -24,7 +25,7 @@ const PostDetails = () => {
           <img  
             src={post?.imageUrl || '/assets/icons/add-post.svg'}
             alt="post"
-            className="post_details-img"
+            className="post_details-img pointer-events-none"
           />
           <div className="post_details-info">
             <div className="flex-between w-full">

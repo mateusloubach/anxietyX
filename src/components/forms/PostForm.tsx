@@ -16,7 +16,7 @@ import React from "react"
 
 type PostFormProps = {
     post?: Models.Document;
-    action?: "Create" | "Update";
+    action?: "Criar" | "Update";
 }
 
 
@@ -76,20 +76,48 @@ const PostForm = ({ post, action }: PostFormProps) => {
           name="caption"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="shad-form_label">Caption</FormLabel>
+              <FormLabel className="shad-form_label">Título</FormLabel>
               <FormControl>
-                <Textarea className="shad-textarea custom-scrollbar" placeholder="shadcn" {...field} />
+                <Textarea className="shad-textarea custom-scrollbar" placeholder="título" {...field} />
               </FormControl>
               <FormMessage className="shad-form_message"/>
             </FormItem>
           )}
         />
+        <div className="flex flex-row gap-9 w-full max-w-5x1 ">
+          <FormField
+            control={form.control}
+            name="location"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="shad-form_label">Local</FormLabel>
+                <FormControl>
+                  <Input type="text" className="shad-input" placeholder="Local" {...field}/>
+                </FormControl>
+                <FormMessage className="shad-form_message"/>
+              </FormItem>
+            )}
+          />
+          <FormField
+            control={form.control}
+            name="tags"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="shad-form_label">Tags</FormLabel>
+                <FormControl>
+                  <Input type="text" className="shad-input" placeholder="Arte, Local, Aprender" {...field}/>
+                </FormControl>
+                <FormMessage className="shad-form_message"/>
+              </FormItem>
+            )}
+          />
+        </div>
         <FormField
           control={form.control}
           name="file"
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="shad-form_label">Add Photo</FormLabel>
+              <FormLabel className="shad-form_label">Inserir Foto</FormLabel>
               <FormControl>
                 <FileUploader 
                     fieldChange={field.onChange}
@@ -100,32 +128,7 @@ const PostForm = ({ post, action }: PostFormProps) => {
             </FormItem>
           )}
         />
-        <FormField
-          control={form.control}
-          name="location"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="shad-form_label">Add Location</FormLabel>
-              <FormControl>
-                <Input type="text" className="shad-input" placeholder="Add Location" {...field}/>
-              </FormControl>
-              <FormMessage className="shad-form_message"/>
-            </FormItem>
-          )}
-        />
-        <FormField
-          control={form.control}
-          name="tags"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="shad-form_label">Add tags(separated by comma " , ")</FormLabel>
-              <FormControl>
-                <Input type="text" className="shad-input" placeholder="Art, Expression, Learn" {...field}/>
-              </FormControl>
-              <FormMessage className="shad-form_message"/>
-            </FormItem>
-          )}
-        />
+
         <div className="flex gap-4 items-center justify-end">
             <Button type="button" className="shad-button_dark_4">Cancel</Button>
             <Button type="submit" className="shad-button_primary whitespace-nowrap"

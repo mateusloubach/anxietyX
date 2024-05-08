@@ -1,11 +1,12 @@
-import GridPostList from "@/components/shared/GridPostList"
-import Loader from "@/components/shared/Loader"
+import GridPostList from "../../components/shared/GridPostList"
+import Loader from "../../components/shared/Loader"
 import { useInView } from "react-intersection-observer";
-import SearchResults from "@/components/shared/SearchResults"
-import { Input } from "@/components/ui/input"
-import useDebounce from "@/hooks/useDebounce"
-import { useGetPosts, useSearchPosts } from "@/lib/react-query/queriesAndMutations"
+import SearchResults from "../../components/shared/SearchResults"
+import { Input } from "../../components/ui/input"
+import useDebounce from "../../hooks/useDebounce"
+import { useGetPosts, useSearchPosts } from "../../lib/react-query/queriesAndMutations"
 import { useState, useEffect } from "react"
+import React from "react";
 
 
 
@@ -20,12 +21,12 @@ const Explore = () => {
     if(inView && !searchValue) {
       fetchNextPage();
     }
-  }, [inView, searchValue])
+  }, [fetchNextPage, inView, searchValue])
 
   if (!posts) {
     return (
       <div className="flex-center w-full h-full">
-          <Loader />      
+          <Loader />
       </div>
     )
   }
@@ -36,19 +37,19 @@ const Explore = () => {
   return (
     <div className="explore-container">
       <div className="explore-inner_container">
-        <h2 className="h3-bold md:h2-bold w-full">Search Posts</h2>
+        <h2 className="h3-bold md:h2-bold w-full">Procurar</h2>
         <div className="flex gap-1 px-4 w-full rounded-lg bg-dark-4">
           <img src="/assets/icons/search.svg" alt="search" width={24} height={24} 
           
           />
-          <Input type="text" placeholder="Search" 
+          <Input type="text" placeholder="Procurar" 
             className="explore-search" value={searchValue} onChange={(e) => setSearchValue(e.target.value)}  
           />
         </div>
       </div>
 
       <div className="flex-between w-full max-w-5x1 mt-16 mb-7">
-        <h3 className="body-bold md:h3-bold w-full">Popular Today</h3>
+        <h3 className="body-bold md:h3-bold w-full">Popular Hoje</h3>
         <div className="flex-center gap-3 bg-dark-3 rounded-xl px-4 py-2 cursor-pointer">
           <p className="small-medium md:base-medium text-light-2">All</p>
           <img src="/assets/icons/filter.svg"
@@ -58,7 +59,7 @@ const Explore = () => {
       </div>
       <div className="flex flex-wrap gap-9 w-full max-w-5x1">
         {shouldShowSearchResults ? (
-          <SearchResults 
+          <SearchResults
             isSearchFetching={isSearchFetching}
             searchedPosts={searchedPosts}
           />

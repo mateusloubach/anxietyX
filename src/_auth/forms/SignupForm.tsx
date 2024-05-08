@@ -1,24 +1,23 @@
-import { zodResolver } from "@hookform/resolvers/zod";
+import * as z from "zod";
 import { useForm } from "react-hook-form";
-import { useToast } from "@/components/ui/use-toast"
-import { z } from "zod";
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input"
-import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage, } from "@/components/ui/form"
-import { Link, useNavigate } from "react-router-dom"
-import { SignUpValidation } from "@/lib/validation"
-import Loader from "@/components/shared/Loader"
-import { useCreateUserAccount, useSignInAccount } from "@/lib/react-query/queriesAndMutations";
-import { useUserContext } from "@/context/AuthContext";
+import { Link, useNavigate } from "react-router-dom";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "../../components/ui/form";
+import { Input } from "../../components/ui/input";
+import { Button } from "../../components/ui/button";
+import Loader from "../../components/shared/Loader";
+import { useToast } from "../../components/ui/use-toast";
+
+import { useCreateUserAccount, useSignInAccount } from "../../lib/react-query/queriesAndMutations";
+import { SignUpValidation } from "../../lib/validation";
+import { useUserContext } from "../../context/AuthContext";
+import React from "react";
 
 const SignupForm = () => {
-  const { toast } = useToast()
+  const { toast } = useToast();
+  const navigate = useNavigate();
   const { checkAuthUser, isLoading: isUserLoading } = useUserContext();
-  const navigate = useNavigate()
-
-  const { mutateAsync: createUserAccount, isPending: isCreatingAccount } = useCreateUserAccount();
-  const { mutateAsync: signInAccount, isPending: isSigningIn } = useSignInAccount();
-
 
   const form = useForm<z.infer<typeof SignUpValidation>>({
     resolver: zodResolver(SignUpValidation),
@@ -29,51 +28,72 @@ const SignupForm = () => {
       password: "",
     },
   });
- 
-  async function onSubmit(values: z.infer<typeof SignUpValidation>) {
-    const newUser = await createUserAccount(values);
 
-    if (!newUser) {
-      return toast({
-        title: "Sign-up failed. Try again." });
-    }
-    const session = await signInAccount({
-      email: values.email,
-      password: values.password,
-    })
-    if (!session) {
-      return toast({
-        title: "Sign-in failed. Try again." });
-    }
+  // Queries
+  const { mutateAsync: createUserAccount, isPending: isCreatingAccount } = useCreateUserAccount();
+  const { mutateAsync: signInAccount, isPending: isSigningInUser } = useSignInAccount();
 
-    const isLoggedIn = await checkAuthUser();
+  // Handler
+  const handleSignup = async (user: z.infer<typeof SignUpValidation>) => {
+    try {
+      const newUser = await createUserAccount(user);
+
+      if (!newUser) {
+        toast({ title: "Sign up failed. Please try again.", });
+        
+        return;
+      }
+
+      const session = await signInAccount({
+        email: user.email,
+        password: user.password,
+      });
+
+      if (!session) {
+        toast({ title: "Something went wrong. Please login your new account", });
+        
+        navigate("/sign-in");
+        
+        return;
+      }
+
+      const isLoggedIn = await checkAuthUser();
 
       if (isLoggedIn) {
         form.reset();
 
         navigate("/");
       } else {
-        return toast({ title: "Login failed. Please try again.", });
+        toast({ title: "Login failed. Please try again.", });
+        
+        return;
       }
-
-  }
+    } catch (error) {
+      console.log({ error });
+    }
+  };
 
   return (
     <Form {...form}>
       <div className="sm:w-420 flex-center flex-col">
-        <img className="pointer-events-none"
-          src="/assets/images/Clogo.svg" alt="logo"
-        />
-        <h2 className="h3-bold md:h2-bold pt-5 sm:pt-12">Create a new account</h2>
-        <p className="text-light-3 small-medium md:base-regular">To use AnxietyX, please enter your account details</p>
-      
-        <form onSubmit={form.handleSubmit(onSubmit)} className="flex flex-col gap-5 w-full mt-4">
+        <img src="/assets/images/logo.svg" alt="logo" />
+
+        <h2 className="h3-bold md:h2-bold pt-5 sm:pt-12">
+          Criar uma nova conta
+        </h2>
+        <p className="text-light-3 small-medium md:base-regular mt-2">
+          Para usar a AnxietyX, insira seus dados
+        </p>
+
+        <form
+          onSubmit={form.handleSubmit(handleSignup)}
+          className="flex flex-col gap-5 w-full mt-4">
           <FormField
             control={form.control}
             name="name"
             render={({ field }) => (
               <FormItem>
-                <FormLabel> Name </FormLabel>
+                <FormLabel className="shad-form_label">Name</FormLabel>
                 <FormControl>
                   <Input type="text" className="shad-input" {...field} />
                 </FormControl>
@@ -87,7 +107,7 @@ const SignupForm = () => {
             name="username"
             render={({ field }) => (
               <FormItem>
-                <FormLabel> Username </FormLabel>
+                <FormLabel className="shad-form_label">Nome de usuário</FormLabel>
                 <FormControl>
                   <Input type="text" className="shad-input" {...field} />
                 </FormControl>
@@ -101,9 +121,9 @@ const SignupForm = () => {
             name="email"
             render={({ field }) => (
               <FormItem>
-                <FormLabel> Email </FormLabel>
+                <FormLabel className="shad-form_label">Email</FormLabel>
                 <FormControl>
-                  <Input type="email" className="shad-input" {...field} />
+                  <Input type="text" className="shad-input" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -115,7 +135,7 @@ const SignupForm = () => {
             name="password"
             render={({ field }) => (
               <FormItem>
-                <FormLabel> Password </FormLabel>
+                <FormLabel className="shad-form_label">Senha</FormLabel>
                 <FormControl>
                   <Input type="password" className="shad-input" {...field} />
                 </FormControl>
@@ -123,21 +143,35 @@ const SignupForm = () => {
               </FormItem>
             )}
           />
-          <Button type="submit" className="shad-button_primary">
-            {isCreatingAccount ? (
+
+          {/* <Button type="submit" className="shad-button_primary">
+            {isCreatingAccount || isSigningInUser || isUserLoading ? (
               <div className="flex-center gap-2">
-                <Loader/> Loading...
+                <Loader /> Loading...
               </div>
-              ) : "Sign up"}            
+            ) : (
+              "Cadastrar"
+            )}
+          </Button> */}
+
+          <Button type="submit" className="shad-button_primary" disabled={true} >
+            <div className="flex-center gap-2">
+                Cadastrar
+            </div>
           </Button>
-          <p className="text-small-regular text-light-2 text-center">
-            Already have an account?
-              <Link to='/sign-in' className="text-primary-500 text-small-semibold ml-1">Sign-In</Link>
+
+          <p className="text-small-regular text-light-2 text-center mt-2">
+            Já tem uma conta?
+            <Link
+              to="/sign-in"
+              className="text-primary-500 text-small-semibold ml-1">
+              Entrar
+            </Link>
           </p>
         </form>
       </div>
     </Form>
-  )
-}
+  );
+};
 
-export default SignupForm
+export default SignupForm;
