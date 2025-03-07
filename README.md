@@ -1,6 +1,4 @@
-# AnxietyX
-
-![AnxietyX Banner](https://your-image-link.com)
+![AnxietyX Banner](https://raw.githubusercontent.com/mateusloubach/anxietyX/785ff0b815872291e856c99d002818c1c6708659/public/assets/images/logo.svg)
 
 AnxietyX is a **community-driven social platform** designed to help people connect, organize, and participate in events, particularly those related to charity and social good. With a sleek dark mode interface, users can explore events, create posts, and engage with others to make a meaningful impact.
 
