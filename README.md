@@ -1,30 +1,56 @@
-# React + TypeScript + Vite
+# AnxietyX
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+![AnxietyX Banner](https://your-image-link.com)
 
-Currently, two official plugins are available:
+AnxietyX is a **community-driven social platform** designed to help people connect, organize, and participate in events, particularly those related to charity and social good. With a sleek dark mode interface, users can explore events, create posts, and engage with others to make a meaningful impact.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Features
+- 🌍 **Community Engagement** – Connect with like-minded people.
+- 📅 **Event Creation & Management** – Organize and discover events.
+- 📝 **Post Sharing** – Share updates, photos, and activities.
+- 🔖 **Saved Posts** – Bookmark important posts for later.
+- 🔎 **Explore Section** – Find trending events and discussions.
+- 🔐 **Secure Authentication** – Log in and manage your profile.
 
-## Expanding the ESLint configuration
+## 🛠️ Tech Stack
+- **Frontend:** React.js, Next.js, TailwindCSS
+- **Backend:** Node.js, Express
+- **Database:** Firebase / MongoDB
+- **Deployment:** Vercel
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## 📥 Installation
 
-- Configure the top-level `parserOptions` property like this:
+To run AnxietyX locally, follow these steps:
 
-```js
-export default {
-  // other rules...
-  parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-  },
-}
+```bash
+# Clone the repository
+git clone https://github.com/yourusername/anxiety-x.git
+cd anxiety-x
+
+# Install dependencies
+npm install
+
+# Run the development server
+npm run dev
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+The app will be available at `http://localhost:3000`.
+
+## 🤝 Contributing
+We welcome contributions! To get started:
+1. Fork the repository.
+2. Create a new branch (`feature-xyz`).
+3. Commit your changes.
+4. Push to your fork and submit a pull request.
+
+## 📄 License
+This project is licensed under the [MIT License](LICENSE).
+
+## 🌎 Connect
+For updates and community discussions, reach out to us:
+- Website: [https://anxiety-x.vercel.app](https://anxiety-x.vercel.app)
+- GitHub Issues: [https://github.com/yourusername/anxiety-x/issues](https://github.com/yourusername/anxiety-x/issues)
+
+---
+
+💙 *Let's build a community that fosters positive impact!*
